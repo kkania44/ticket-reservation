@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-interface MovieQueryRepositoryImpl extends MovieQueryRepository, Repository<MovieQueryDto, Long> {
+interface MovieQuerySpringRepository extends MovieQueryRepository, Repository<MovieQueryDto, Long> {
 
     @Override
     Optional<MovieQueryDto> findById(Long id);

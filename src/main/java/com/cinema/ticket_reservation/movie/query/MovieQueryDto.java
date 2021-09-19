@@ -1,5 +1,6 @@
 package com.cinema.ticket_reservation.movie.query;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 @Table(name = "movie")
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class MovieQueryDto {
 
     @Id
