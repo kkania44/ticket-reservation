@@ -4,8 +4,7 @@ import com.cinema.ticket_reservation.movie.query.MovieQueryDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -13,16 +12,20 @@ import java.time.LocalTime;
 @Table(name = "movie_show")
 @NoArgsConstructor
 @Getter
-public class MovieShow {
+class MovieShow {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
     private MovieQueryDto movie;
     private LocalDate date;
     private LocalTime time;
     private int screeningRoom;
     private boolean isPremiere;
 
-    public MovieShow(MovieQueryDto movie, LocalDate date, LocalTime time, int screeningRoom, boolean isPremiere) {
+    MovieShow(MovieQueryDto movie, LocalDate date, LocalTime time, int screeningRoom, boolean isPremiere) {
         this.movie = movie;
         this.date = date;
         this.time = time;

@@ -3,6 +3,7 @@ package com.cinema.ticket_reservation.movie.domain;
 import com.cinema.ticket_reservation.movie.query.MovieQueryDto;
 import lombok.AllArgsConstructor;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -10,12 +11,13 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Component
 @AllArgsConstructor
 public class MovieInitData {
 
     private final MovieRepository repository;
 
-    public Set<MovieQueryDto> initMovies(ContextRefreshedEvent contextRefreshedEvent) {
+    public Set<MovieQueryDto> initMovies() {
         Movie movie1 = new Movie("Title 1", "Director 1", 2020, "Actor 1, Actress 1",
                 LocalDate.now().minusDays(15), "Movie description 123 123", "Fantasy");
         Movie movie2 = new Movie("Title 12", "Director 4", 2021, "Actress 1, Actress 2",

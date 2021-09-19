@@ -1,11 +1,7 @@
 package com.cinema.ticket_reservation.movie.domain;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Set;
-
-interface MovieRepository extends Repository<Movie, Long> {
-
-    Set<Movie> saveAll(Set<Movie> movies);
+interface MovieRepository extends JpaRepository<Movie, Long> {
 
 }

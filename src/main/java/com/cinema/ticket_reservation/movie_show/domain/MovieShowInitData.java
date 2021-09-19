@@ -3,12 +3,14 @@ package com.cinema.ticket_reservation.movie_show.domain;
 import com.cinema.ticket_reservation.movie.query.MovieQueryDto;
 import com.cinema.ticket_reservation.movie_show.query.MovieShowQueryDto;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@Component
 @AllArgsConstructor
 public class MovieShowInitData {
 
