@@ -1,6 +1,7 @@
 package com.cinema.ticket_reservation.movie_show.query;
 
 import com.cinema.ticket_reservation.movie.query.MovieQueryDto;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalTime;
 @Entity
 @Table(name = "movie_show")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 public class MovieShowQueryDto {
 
