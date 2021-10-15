@@ -3,6 +3,7 @@ package com.cinema.ticket_reservation.reservation.domain;
 import com.cinema.ticket_reservation.reservation.dto.ReservationStatus;
 import lombok.AllArgsConstructor;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 class ReservationTestRepository implements ReservationRepository {
@@ -30,6 +31,16 @@ class ReservationTestRepository implements ReservationRepository {
             id++;
         }
         return reservation;
+    }
+
+    @Override
+    public Optional<Reservation> findById(Long id) {
+        Reservation reservation = reservations.get(id);
+        if (reservation == null) {
+            throw new EntityNotFoundException();
+        } else {
+            return Optional.of(reservation);
+        }
     }
 
     Reservation getById(Long id) {

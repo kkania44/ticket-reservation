@@ -27,6 +27,7 @@ class Reservation {
     @Setter
     private String customerEmail;
     private LocalDateTime createdOn;
+    @Setter
     private ReservationStatus status;
 
     Reservation(MovieShowQueryDto movieShow, String seats) {
