@@ -4,6 +4,7 @@ import com.cinema.ticket_reservation.reservation.dto.ReservationStatus;
 import lombok.AllArgsConstructor;
 
 import javax.persistence.EntityNotFoundException;
+import java.time.LocalDateTime;
 import java.util.*;
 
 class ReservationTestRepository implements ReservationRepository {
@@ -43,8 +44,24 @@ class ReservationTestRepository implements ReservationRepository {
         }
     }
 
+    @Override
+    public Set<Reservation> findAllByStatusAndCreatedOnLessThan(ReservationStatus status, LocalDateTime dateTime) {
+        Set<Reservation> result = new HashSet<>();
+        for (Map.Entry<Long, Reservation> res : reservations.entrySet()) {
+            Reservation value = res.getValue();
+            if (value.getStatus().equals(status) && value.getCreatedOn().isBefore(dateTime)) {
+                result.add(value);
+            }
+        }
+        return result;
+    }
+
     Reservation getById(Long id) {
         return reservations.get(id);
+    }
+
+    Set<Reservation> getAll() {
+        return new HashSet<>(reservations.values());
     }
 
 }

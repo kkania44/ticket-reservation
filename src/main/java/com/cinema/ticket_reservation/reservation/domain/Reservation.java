@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 class Reservation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Setter
     private Long id;
     @ManyToOne
@@ -26,8 +26,10 @@ class Reservation {
     private String seats;
     @Setter
     private String customerEmail;
+    @Setter
     private LocalDateTime createdOn;
     @Setter
+    @Enumerated(EnumType.STRING)
     private ReservationStatus status;
 
     Reservation(MovieShowQueryDto movieShow, String seats) {
@@ -38,6 +40,6 @@ class Reservation {
     }
 
     ReservationQueryDto query() {
-        return new ReservationQueryDto(id, movieShow,seats,customerEmail,createdOn);
+        return new ReservationQueryDto(id, movieShow,seats,customerEmail,createdOn, status);
     }
 }

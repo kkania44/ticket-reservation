@@ -15,4 +15,6 @@ interface ReservationRepository {
 
     Optional<Reservation> findById(Long id);
 
+    Set<Reservation> findAllByStatusAndCreatedOnLessThan(ReservationStatus status, LocalDateTime dateTime);
+
 }

@@ -3,8 +3,6 @@ package com.cinema.ticket_reservation.reservation.domain;
 import com.cinema.ticket_reservation.movie.query.MovieQueryDto;
 import com.cinema.ticket_reservation.movie_show.query.MovieShowQueryDto;
 import com.cinema.ticket_reservation.reservation.dto.*;
-import com.cinema.ticket_reservation.reservation.query.ReservationQueryDto;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -103,6 +101,23 @@ class ReservationFacadeTest {
 
         assertNotNull(actualReservation);
         assertSame(actualReservation, reservation1);
+    }
+
+    @Test
+    void shouldMarkReservationOlderThan15MinsAsExpired() {
+        Reservation reservation1 = new Reservation(movieShowQueryDto, "D1,D2,D3");
+        Reservation reservation2 = new Reservation(movieShowQueryDto, "E5,E6,E7,E8");
+        Reservation reservation3 = new Reservation(movieShowQueryDto, "F12,F13");
+        reservation1.setCreatedOn(LocalDateTime.now().minusMinutes(20));
+        reservation3.setCreatedOn(LocalDateTime.now().minusMinutes(23));
+        testRepo.save(reservation1);
+        testRepo.save(reservation2);
+        testRepo.save(reservation3);
+        facade.deleteUnconfirmedReservationOlderThan15Minutes();
+
+        assertEquals(reservation2, testRepo.getById(2L));
+        assertEquals(ReservationStatus.EXPIRED, testRepo.getById(1L).getStatus());
+        assertEquals(ReservationStatus.EXPIRED, testRepo.getById(3L).getStatus());
     }
 
 }

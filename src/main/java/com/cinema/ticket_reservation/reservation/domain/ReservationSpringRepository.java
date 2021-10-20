@@ -3,6 +3,7 @@ package com.cinema.ticket_reservation.reservation.domain;
 import com.cinema.ticket_reservation.reservation.dto.ReservationStatus;
 import org.springframework.data.repository.Repository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
@@ -18,5 +19,7 @@ interface ReservationSpringRepository extends ReservationRepository, Repository<
     @Override
     Optional<Reservation> findById(Long id);
 
+    @Override
+    Set<Reservation> findAllByStatusAndCreatedOnLessThan(ReservationStatus status, LocalDateTime dateTime);
 
 }
