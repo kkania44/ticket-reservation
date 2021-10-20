@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/reservations")
@@ -19,7 +22,12 @@ class ReservationQueryController {
     @GetMapping("/movie-show/{id}/occupied-seats")
     ResponseEntity<?> getOccupiedSeats(@PathVariable("id") Long id) {
         ArrayList<String> seats = new ArrayList<>();
-        repository.findAllByMovieShowId(id).forEach(r -> seats.add(r.getSeats()));
+        List<String> occupiedSeats = repository.findAllByMovieShowId(id).stream()
+                .map(ReservationQueryDto::getSeats)
+                .collect(Collectors.toList());
+        for (String s: occupiedSeats) {
+            seats.addAll(Arrays.asList(s.split(",")));
+        }
         return ResponseEntity.ok(seats);
     }
 
